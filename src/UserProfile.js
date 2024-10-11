@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProjectForm from './ProjectForm';
+import ProjectForm from './ProjectForm'; // Import the ProjectForm component
 
 const UserProfile = ({ userInfo, setUserInfo }) => {
   const navigate = useNavigate();
-  const [isAddingProject, setIsAddingProject] = useState(false);
+  const [isProjectFormVisible, setIsProjectFormVisible] = useState(false);
 
   const handleLogout = () => {
     setUserInfo({ name: '', bio: '', projects: [] }); // Reset user info
@@ -12,12 +12,14 @@ const UserProfile = ({ userInfo, setUserInfo }) => {
     navigate('/'); // Redirect to home
   };
 
-  const handleAddProjectClick = () => {
-    setIsAddingProject(true); // Show the Add Project form
-  };
-
-  const handleCloseOverlay = () => {
-    setIsAddingProject(false); // Hide the Add Project form
+  const handleAddProject = (project) => {
+    // Update userInfo with the new project
+    const newProject = { ...project, image: URL.createObjectURL(project.image) };
+    setUserInfo(prevState => ({
+      ...prevState,
+      projects: [...prevState.projects, newProject]
+    }));
+    setIsProjectFormVisible(false); // Close the form
   };
 
   const projects = userInfo.projects || [];
@@ -32,9 +34,9 @@ const UserProfile = ({ userInfo, setUserInfo }) => {
       {projects.length > 0 ? (
         projects.map((project, index) => (
           <div key={index} className="bg-gradient-to-r from-gray-700 to-gray-600 p-4 mb-4 rounded-lg border border-gray-600">
-            <h4 className="text-white inline-block">{project.title || "Untitled Project"}</h4>
-            {project.image && <img src={project.image} alt={project.title} className="mt-2 mb-2 rounded-md inline ml-2" style={{ width: '50px', height: '50px' }} />}
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline ml-2">
+            <h4 className="text-white inline">{project.title || "Untitled Project"}</h4>
+            {project.image && <img src={project.image} alt={project.title} className="inline w-16 h-16 ml-2 rounded-md" />}
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline block mt-2">
               View Project
             </a>
           </div>
@@ -43,30 +45,21 @@ const UserProfile = ({ userInfo, setUserInfo }) => {
         <p className="text-white">No projects available.</p>
       )}
 
-      <div className="flex justify-between">
-        <button
-          onClick={handleAddProjectClick}
-          className="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-md"
-        >
-          Add Another Project
-        </button>
-        <button
-          onClick={handleLogout}
-          className="mt-4 py-2 px-4 bg-red-600 hover:bg-red-500 text-white rounded-md"
-        >
-          Logout
-        </button>
-      </div>
+      <button
+        onClick={() => setIsProjectFormVisible(true)}
+        className="mt-4 py-2 px-4 bg-green-600 hover:bg-green-500 text-white rounded-md"
+      >
+        Add Another Project
+      </button>
+      <button
+        onClick={handleLogout}
+        className="mt-4 ml-2 py-2 px-4 bg-red-600 hover:bg-red-500 text-white rounded-md"
+      >
+        Logout
+      </button>
 
-      {isAddingProject && (
-        <div className="overlay">
-          <div className="modal">
-            <button onClick={handleCloseOverlay} className="close-button">✖</button>
-            <h3 className="text-lg font-bold text-white">Add Project</h3>
-            {/* Place the Add Project Form component here */}
-            <ProjectForm onClose={handleCloseOverlay} setUserInfo={setUserInfo} />
-          </div>
-        </div>
+      {isProjectFormVisible && (
+        <ProjectForm onAddProject={handleAddProject} onClose={() => setIsProjectFormVisible(false)} />
       )}
     </div>
   );
