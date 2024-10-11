@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Form from './Form';
+import UserProfile from './UserProfile';
 
-function App() {
+const App = () => {
+  // Initialize userInfo with default values
+  const [userInfo, setUserInfo] = useState({ name: '', bio: '', projects: [] });
+
+  // Load userInfo from local storage on component mount
+  useEffect(() => {
+    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (storedUserInfo) {
+      setUserInfo(storedUserInfo);
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Form userInfo={userInfo} setUserInfo={setUserInfo} />} />
+      <Route path="/profile" element={<UserProfile userInfo={userInfo} setUserInfo={setUserInfo} />} />
+    </Routes>
   );
-}
+};
 
 export default App;
