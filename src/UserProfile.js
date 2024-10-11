@@ -70,7 +70,7 @@ const UserProfile = ({ userInfo, setUserInfo }) => {
 
       {isGuest ? (
         <button
-          onClick={() => navigate('/form')} // Redirect to the form for login
+          onClick={() => navigate('/')} // Redirect to the form for login
           className="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-md"
         >
           Log In
