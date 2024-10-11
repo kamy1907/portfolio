@@ -46,9 +46,7 @@ const ProjectForm = ({ setUserInfo, onClose }) => {
           onClick={onClose} 
           className="text-white absolute top-2 right-2 text-xl bg-red-600 hover:bg-red-500 rounded-full p-3"
           aria-label="Close"
-        >
-          X
-        </button>
+        > X </button>
         <h2 className="text-2xl font-bold text-white mb-4">Add New Project</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -88,9 +86,8 @@ const ProjectForm = ({ setUserInfo, onClose }) => {
           <button
             type="submit"
             className="w-full py-2 px-4 bg-gradient-to-r from-gray-600 to-gray-500 text-white rounded-md shadow hover:bg-gray-700 transition"
-          >
-            Submit
-          </button>
+          >Submit
+</button>
         </form>
       </div>
     </div>
