@@ -27,6 +27,7 @@ const ProjectForm = ({ onAddProject, onClose }) => {
               onChange={(e) => setTitle(e.target.value)}
               className="mt-1 p-2 block w-full border border-gray-600 rounded-md text-black"
               required
+              placeholder="Enter project title"
             />
           </div>
 

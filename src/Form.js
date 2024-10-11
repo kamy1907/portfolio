@@ -60,7 +60,7 @@ const Form = ({ setUserInfo }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-gradient-to-r from-black to-gray-800 rounded-lg shadow-lg mt-10 border border-gray-600">
+    <div className="max-w-md mx-auto p-6 bg-gradient-to-r from-black to-gray-800 rounded-lg shadow-lg mt-10 border border-gray-600 transition-opacity duration-500">
       {!isSubmitted ? (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -71,6 +71,7 @@ const Form = ({ setUserInfo }) => {
               onChange={(e) => setName(e.target.value)}
               className="mt-1 p-2 block w-full border border-gray-600 rounded-md shadow-sm focus:ring-gray-400 focus:border-gray-400 text-black"
               required
+              placeholder="Enter your name"
             />
           </div>
 
@@ -81,6 +82,8 @@ const Form = ({ setUserInfo }) => {
               onChange={(e) => setBio(e.target.value)}
               className="mt-1 p-2 block w-full border border-gray-600 rounded-md shadow-sm focus:ring-gray-400 focus:border-gray-400 text-black"
               rows="4"
+              required
+              placeholder="Enter Bio"
             />
           </div>
 
@@ -96,8 +99,10 @@ const Form = ({ setUserInfo }) => {
                   onChange={(e) => handleProjectChange(index, e)}
                   className="mt-1 p-2 block w-full border border-gray-600 rounded-md shadow-sm focus:ring-gray-400 focus:border-gray-400 text-black"
                   required
+                  placeholder="Enter project title"
                 />
               </div>
+
               <div className="mb-2">
                 <label className="block text-sm font-medium text-white">Project Image:</label>
                 <input
@@ -109,6 +114,7 @@ const Form = ({ setUserInfo }) => {
                   required
                 />
               </div>
+
               <div className="mb-2">
                 <label className="block text-sm font-medium text-white">Project Link:</label>
                 <input

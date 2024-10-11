@@ -106,6 +106,7 @@ const UserProfile = ({ userInfo, setUserInfo }) => {
                 onChange={handleInputChange}
                 className="mt-1 p-2 block w-full border border-gray-600 rounded-md shadow-sm focus:ring-gray-400 focus:border-gray-400 text-black"
                 required
+                placeholder="Enter project title"
               />
             </div>
             <div className="mb-4">
@@ -127,6 +128,7 @@ const UserProfile = ({ userInfo, setUserInfo }) => {
                 onChange={handleInputChange}
                 className="mt-1 p-2 block w-full border border-gray-600 rounded-md shadow-sm focus:ring-gray-400 focus:border-gray-400 text-black"
                 required
+                placeholder="Enter project URL"
               />
             </div>
             <div className="flex justify-end">
